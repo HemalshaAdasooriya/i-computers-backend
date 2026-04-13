@@ -5,9 +5,12 @@ import userRouter from "./routes/userRouter.js";
 import productRouter from "./routes/productRouter.js";
 import cors from "cors"
 import jwt from "jsonwebtoken"
+import dotenv from "dotenv"
+
+dotenv.config()
 dns.setServers(["1.1.1.1"]);
 
-const mongodbURI = "mongodb+srv://admin:1234@cluster0.wnkxql3.mongodb.net/?appName=Cluster0"
+const mongodbURI = process.env.MONGO_URL
 
 mongoose.connect(mongodbURI).then(
     ()=>{
@@ -27,7 +30,7 @@ app.use(
         if(authorizationHeader != null){
             const token = authorizationHeader.replace("Bearer ","")
             
-            jwt.verify(token,"secretKey96$2025",
+            jwt.verify(token,process.env.JWT_SECRET,
             (error,content)=>{
                 if(content == null){
                     console.log("Invalid token")

@@ -33,7 +33,7 @@ export function loginUser(req,res){
         (users)=>{
             if(users[0]==null){
                 res.json({
-                    message : "User not found"
+                    message : "User not found"+ req.body.email
                 })
             }else{
                 const user = users[0]
@@ -51,12 +51,13 @@ export function loginUser(req,res){
                     image : user.image
                 }
 
-                const token = jwt.sign(Payload,"secretKey96$2025",{
+                const token = jwt.sign(Payload,process.env.JWT_SECRET,{
                     expiresIn : "150h"
                 })
                     res.json({
                         message : "Login successful",
-                        token : token
+                        token : token,
+                        role: user.role,
                     })
                 }else{
                     res.status(401).json({
