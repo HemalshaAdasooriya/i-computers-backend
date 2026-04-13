@@ -3,6 +3,7 @@ import mongoose from "mongoose"
 import dns from "node:dns/promises";
 import userRouter from "./routes/userRouter.js";
 import productRouter from "./routes/productRouter.js";
+import cors from "cors"
 import jwt from "jsonwebtoken"
 dns.setServers(["1.1.1.1"]);
 
@@ -15,6 +16,8 @@ mongoose.connect(mongodbURI).then(
 )
 
 let app = express()
+
+app.use(cors())
 
 app.use(express.json())
 
@@ -47,8 +50,8 @@ app.use(
 )
 
 
-app.use("/users",userRouter)
-app.use("/products",productRouter)
+app.use("/api/users",userRouter)
+app.use("/api/products",productRouter)
 
 
 app.listen(5000,()=>{
