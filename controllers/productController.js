@@ -5,7 +5,7 @@ import { isAdmin } from "./userController.js";
 
 export function createProduct(req,res){
     if(!isAdmin(req)){
-    req.status(403).json({
+    res.status(403).json({
         message : "Forbidden"
     });
     return

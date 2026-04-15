@@ -33,8 +33,9 @@ app.use(
             jwt.verify(token,process.env.JWT_SECRET,
             (error,content)=>{
                 if(content == null){
+
                     console.log("Invalid token")
-                    res.json({
+                    res.status(401).json({
                         message : "Invalid token"
                     })
                     
