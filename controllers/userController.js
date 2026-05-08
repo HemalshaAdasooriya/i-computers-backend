@@ -53,9 +53,7 @@ export function loginUser(req,res){
                     image : user.image
                 }
 
-                const token = jwt.sign(Payload,process.env.JWT_SECRET,{
-                    expiresIn : "150h"
-                })
+                const token = jwt.sign(Payload,process.env.JWT_SECRET)
                     res.json({
                         message : "Login successful",
                         token : token,

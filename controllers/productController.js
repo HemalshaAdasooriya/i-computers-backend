@@ -60,7 +60,7 @@ export async function getAllProducts(req,res){
 
 export function deleteProduct(req,res){
     if(!isAdmin(req)){
-    req.status(403).json({
+    res.status(403).json({
         message : "only admin can delete products"
     });
     return

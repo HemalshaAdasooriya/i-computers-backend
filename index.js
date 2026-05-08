@@ -35,6 +35,7 @@ app.use(
                 if(content == null){
 
                     console.log("Invalid token")
+                    console.log(req.headers.authorization);
                     res.status(401).json({
                         message : "Invalid token"
                     })
@@ -60,5 +61,6 @@ app.use("/api/products",productRouter)
 
 app.listen(5000,()=>{
         console.log("server is running...")
+        
     }
 )
